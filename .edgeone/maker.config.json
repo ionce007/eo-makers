@@ -1,0 +1,8 @@
+{
+  "runtime": "nodejs",
+  "runtimeVersion": "20",
+  "buildCommand": "npm install",
+  "startCommand": "npm start",
+  "entry": "app.js",
+  "port": 3000
+}
