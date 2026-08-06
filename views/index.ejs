@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 60px 20px;
+        }
+
+        .wrap {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 12px;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 14px;
+            padding: 26px;
+            margin: 20px 0;
+        }
+
+        .item {
+            padding: 6px 0;
+            font-size: 16px;
+        }
+
+        ul {
+            margin: 12px 0 12px 22px;
+        }
+
+        .btn {
+            padding: 9px 18px;
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 4px;
+        }
+
+        pre {
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>✅ 服务端动态渲染页面（EJS）</h1>
+        <div class="card">
+            <div class="item">服务名称：<%= serverName %>
+            </div>
+            <div class="item">当前时间：<%= time %>
+            </div>
+            <div class="item">项目作者：<%= author %>
+            </div>
+
+            <p style="margin-top:12px;">技术清单：</p>
+            <ul>
+                <% list.forEach(item=> { %>
+                    <li>
+                        <%= item %>
+                    </li>
+                    <% }) %>
+            </ul>
+
+            <button class="btn" onclick="testApi()">调用后端API</button>
+            <pre id="result">等待接口请求...</pre>
+        </div>
+    </div>
+
+    <script>
+        async function testApi() {
+            const res = await fetch("/api/hello?name=动态页面访客");
+            const data = await res.json();
+            document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+
+</html>
