@@ -5,5 +5,12 @@
   "startCommand": "node app.js",
   "entry": "app.js",
   "port": 3000,
-  "workingDirectory": "./"
+  "workingDirectory": "./",
+  "routeRules": [
+    {
+      "path": "/*",
+      "target": "node",
+      "priority": 100
+    }
+  ]
 }
