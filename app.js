@@ -2,15 +2,12 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// EdgeOne Makers 端口
 const PORT = process.env.PORT || 3000;
+const rootPath = process.cwd(); // 使用进程工作目录代替 __dirname
 
-// 配置EJS模板引擎
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// 托管静态资源
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(rootPath, 'views'));
+app.use(express.static(path.join(rootPath, 'public')));
 
 // 解析JSON请求体
 app.use(express.json());

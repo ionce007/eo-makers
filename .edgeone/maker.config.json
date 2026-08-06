@@ -2,7 +2,8 @@
   "runtime": "nodejs",
   "runtimeVersion": "20",
   "buildCommand": "npm install",
-  "startCommand": "npm start",
+  "startCommand": "node app.js",
   "entry": "app.js",
-  "port": 3000
+  "port": 3000,
+  "workingDirectory": "./"
 }
