@@ -53,17 +53,29 @@ app.post('/api/post', (req, res) => {
   });
 });
 
-// API 404捕获
-app.use((req, res) => {
-  if (req.path.startsWith('/api')) {
-    res.status(404).json({ code: -1, msg: "接口不存在" });
-  } else {
-    res.status(404).send('<h1>404 页面不存在</h1>');
-  }
+// API 404
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ code: -1, msg: "接口不存在" });
 });
 
-app.listen(PORT, () => {
-  console.log(`服务启动，监听端口：${PORT}`);
+// 全局兜底路由
+app.get('*', (req, res) => {
+  const pageData = {
+    title: 'EdgeOne Makers Express 动态主页',
+    serverName: 'Cloud Functions Node.js',
+    time: new Date().toLocaleString('zh-CN'),
+    author: 'Demo Project',
+    list: ['Express', 'EJS模板', 'EdgeOne Makers', '服务端渲染']
+  };
+  res.render('index', pageData);
 });
+
+// 区分本地运行/平台运行
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`服务启动，监听端口：${PORT}`);
+  });
+}
 
 module.exports = app;
